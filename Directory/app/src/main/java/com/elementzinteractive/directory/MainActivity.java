@@ -1,13 +1,20 @@
 package com.elementzinteractive.directory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,8 +31,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
+        Button btn = (Button)findViewById(R.id.button3);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),view.class);
+                i.putExtra("pass_data","PASS DATA");
+                startActivity(i);
+            }
+        });
+        ListView listViewEmployee = (ListView)findViewById(R.id.listView);
+        String[] items;
+        items = new String[] { "Vegetables","Fruits","Flower Buds","Legumes","Bulbs","Tubers" };
+        //ListAdapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, items);
+        ArrayAdapter<String> adapt = new ArrayAdapter<String>();
+
+        listViewEmployee.setAdapter(new ArrayAdapter<String>());
     }
 
     @Override
