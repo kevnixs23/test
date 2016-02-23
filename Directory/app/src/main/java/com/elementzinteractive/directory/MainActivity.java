@@ -7,14 +7,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Button btn = (Button)findViewById(R.id.button3);
+
+        /* Button btn = (Button)findViewById(R.id.button3);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,9 +49,87 @@ public class MainActivity extends AppCompatActivity {
         String[] items;
         items = new String[] { "Vegetables","Fruits","Flower Buds","Legumes","Bulbs","Tubers" };
         //ListAdapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, items);
-        ArrayAdapter<String> adapt = new ArrayAdapter<String>();
+        List<String> your_array_list = new ArrayList<String>();
+        your_array_list.add("foo");
+        your_array_list.add("bar");
+        your_array_list.add("delete");
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                your_array_list );
+        Log.e("On Create","On Create");
+        listViewEmployee.setAdapter(arrayAdapter);*/
 
-        listViewEmployee.setAdapter(new ArrayAdapter<String>());
+        ListView listViewEmployee;
+        listViewEmployee = (ListView) findViewById(R.id.listPhone);
+
+        List<Contact> listPhoneBook = new ArrayList<Contact>();
+        listPhoneBook.add(new Contact(R.drawable.avatar_jenny,
+                "Maria Kahim", "010-9817-6331", "pete.houston.17187@gmail.com"));
+        listPhoneBook.add(new Contact(R.drawable.avatar_lina,
+                "Lina Cheng", "046-7764-1142", "lina.cheng011@sunny.com"));
+        listPhoneBook.add(new Contact(R.drawable.avatar_jenny,
+                "Jenny Nguyen", "0913-223-498", "jenny_in_love98@yahoo.com"));
+
+        listPhoneBook.add(new Contact(R.drawable.avatar_jenny,
+                "Jenny Nguyen", "0913-223-498", "jenny_in_love98@yahoo.com"));
+
+        ContactAdapter adapter = new ContactAdapter(this, listPhoneBook);
+        listViewEmployee.setAdapter(adapter);
+
+        listViewEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> av, View view, int i, long l) {
+                String mname = ((TextView) view.findViewById(R.id.tvName)).getText().toString();
+                String number = ((TextView) view.findViewById(R.id.tvPhone)).getText().toString();
+                String email = ((TextView) view.findViewById(R.id.tvEmail)).getText().toString();
+
+                Intent intent = new Intent(getApplicationContext(), view.class);
+                intent.putExtra("name", mname);
+                intent.putExtra("phone", number);
+                intent.putExtra("email", email);
+                startActivity(intent);
+                //Toast.makeText(MainActivity.this, "myPos " + i +"\n"+name, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("On Start", "On Start");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("On Resume", "On Resume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("On Pause", "On Pause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("On Stop", "On Stop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("On Destroy", "On Destroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("On Restart", "On Restart");
     }
 
     @Override

@@ -11,7 +11,19 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.elementzinteractive.directory.MainActivity"
     tools:showIn="@layout/activity_main">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
+        <ListView
+            android:id="@+id/listPhone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+<!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,5 +73,5 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true" />
     </RelativeLayout>
-
+-->
 </RelativeLayout>
